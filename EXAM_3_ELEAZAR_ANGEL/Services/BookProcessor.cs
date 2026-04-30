@@ -16,7 +16,6 @@ namespace EXAM_3_ELEAZAR_ANGEL.Services
 
             foreach (var b in validBooks)
             {
-                // do logic
                 System.Console.WriteLine(b.Title);
             }
         }

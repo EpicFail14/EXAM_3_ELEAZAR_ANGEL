@@ -8,7 +8,7 @@ namespace EXAM_3_ELEAZAR_ANGEL.Strategies
     {
         public double CalculateFee(int days)
         {
-            return days * 3.0; // higher penalty
+            return days * 3.0;
         }
     }
 }
