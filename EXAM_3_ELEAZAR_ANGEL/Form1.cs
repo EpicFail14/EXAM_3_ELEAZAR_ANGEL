@@ -253,16 +253,30 @@ namespace EXAM_3_ELEAZAR_ANGEL
                     Status = "Available"
                 };
 
-                var author = _context.Authors
-                    .FirstOrDefault(a => a.Name == form.AuthorName);
+                var authorNames = form.AuthorName.Split(',');
 
-                if (author == null)
+                var authors = new List<Author>();
+
+                foreach (var name in authorNames)
                 {
-                    author = new Author { Name = form.AuthorName };
-                    _context.Authors.Add(author);
+                    string clean = name.Trim();
+
+                    if (string.IsNullOrWhiteSpace(clean))
+                        continue;
+
+                    var existing = _context.Authors
+                        .FirstOrDefault(a => a.Name == clean);
+
+                    if (existing == null)
+                    {
+                        existing = new Author { Name = clean };
+                        _context.Authors.Add(existing);
+                    }
+
+                    authors.Add(existing);
                 }
 
-                book.Authors = new List<Author> { author };
+                book.Authors = authors;
 
                 _context.Books.Add(book);
                 _context.SaveChanges();
